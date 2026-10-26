@@ -1,53 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio Hub</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; }
-    header { padding: 3rem 1rem; text-align: center; background: #f5f5f5; }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    p.subtitle { color: #555; font-size: 1.1rem; }
-    nav { margin-top: 2rem; }
-    nav a { margin: 0 1rem; color: #0066cc; text-decoration: none; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 720px; margin: 3rem auto; padding: 0 1rem; }
-    section { margin-bottom: 2rem; }
-    h2 { font-size: 1.5rem; margin-bottom: 0.75rem; border-bottom: 2px solid #eee; padding-bottom: 0.25rem; }
-    ul { list-style: disc inside; gap: 0.5rem; }
-    footer { text-align: center; padding: 2rem; color: #777; font-size: 0.9rem; border-top: 1px solid #eee; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kelvin Shepherd | IT, DevOps and GRC portfolio</title>
+<meta name="description" content="Portfolio of Kelvin Shepherd: AtlasOps, a DevSecOps pipeline, and a GRC case study.">
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--text:#12151c;--muted:#566070;--line:#e2e6ee;--accent:#1d4ed8;--tag:#eef2ff;--tagtext:#2a3a8f}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1117;--card:#161b24;--text:#eef1f6;--muted:#9aa5b5;--line:#252c39;--accent:#7aa2ff;--tag:#1c2540;--tagtext:#b9c8ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:880px;margin:0 auto;padding:56px 20px 40px}
+h1{font-size:2.1rem;line-height:1.2;margin:0 0 12px}
+h2{font-size:1.15rem;margin:0 0 6px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:1.08rem;max-width:640px}
+.grid{display:grid;gap:18px;margin-top:32px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;padding:0;list-style:none}
+.tags li{background:var(--tag);color:var(--tagtext);border-radius:999px;padding:2px 10px;font-size:.8rem}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0}
+a{color:var(--accent);font-weight:600;text-decoration:none}
+a:hover,a:focus-visible{text-decoration:underline}
+.note{color:var(--muted);font-size:.92rem}
+ul.facts{margin:0 0 12px;padding-left:20px}
+ul.facts li{margin-bottom:4px}
+footer{margin-top:36px;color:var(--muted);font-size:.9rem}
+</style>
 </head>
 <body>
+<main>
   <header>
-    <h1>Portfolio Hub</h1>
-    <p class="subtitle">Projects, writing, and work</p>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <h1>Kelvin Shepherd</h1>
+    <p class="lead">U.S. Navy veteran with 18+ years of federal service, moving into IT support, DevOps and GRC. These projects show how I work: documented, tested, and checked before they ship.</p>
   </header>
-  <main>
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>AtlasOps</strong> — Next.js + OpenNext on Cloudflare Workers</li>
+
+  <section class="grid" aria-label="Projects">
+
+    <article class="card">
+      <h2>AtlasOps: private document intelligence</h2>
+      <p>Upload PDFs, organize them into projects, and ask questions in plain language. The app returns the passages that answer them, ranked by similarity.</p>
+      <ul class="tags"><li>FastAPI</li><li>PostgreSQL + pgvector</li><li>Next.js</li><li>Redpanda</li><li>Docker Compose</li><li>Cloudflare Workers</li></ul>
+      <p class="note">The web front end and demo mode are live on Cloudflare Workers. The full stack, including the API and document worker, runs locally with Docker Compose.</p>
+      <p class="links">
+        <a href="https://atlasops.shepdogg6t7.workers.dev">Live demo</a>
+        <a href="https://github.com/shepdogg6t7-glitch/atlasops">Source code</a>
+        <a href="https://github.com/shepdogg6t7-glitch/atlasops/wiki">Infrastructure notes</a>
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>DevSecOps pipeline for AtlasOps</h2>
+      <p>Every change goes through a pull request and a required status check before it reaches the main branch.</p>
+      <ul class="facts">
+        <li>Backend tests against a real pgvector database, plus lint, type-check and production build for the web app</li>
+        <li>Container builds, Trivy image scan, pip-audit, npm audit, and a gitleaks secret scan</li>
+        <li>Deploys run through Cloudflare Workers Builds, so no deploy token is stored in GitHub or on my machine</li>
       </ul>
-    </section>
-    <section id="about">
-      <h2>About</h2>
-      <p>Welcome to the portfolio hub.</p>
-    </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Reach out via GitHub or email.</p>
-    </section>
-  </main>
+      <ul class="tags"><li>GitHub Actions</li><li>Trivy</li><li>gitleaks</li><li>Branch protection</li><li>Workers Builds</li></ul>
+      <p class="links">
+        <a href="https://github.com/shepdogg6t7-glitch/atlasops/tree/main/.github/workflows">Workflow files</a>
+        <a href="https://github.com/shepdogg6t7-glitch/atlasops/wiki">How deploys and rollbacks work</a>
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>GRC case study: Lone Star Logistics</h2>
+      <p>A fictitious mid-sized freight and logistics company (about 450 employees) used as the setting for three connected governance, risk and compliance projects, aligned to NIST CSF v2.0.</p>
+      <ul class="facts">
+        <li><strong>Policy suite:</strong> Access Control, Incident Response and Vendor Risk Management policies</li>
+        <li><strong>Risk register and gap assessment:</strong> four risks mapped to policy gaps and a documented incident</li>
+        <li><strong>System hardening auditor:</strong> a Python script based on CIS benchmarks, run against Ubuntu 22.04 until all six automated checks passed</li>
+        <li><strong>Network lab:</strong> a Cisco Packet Tracer design with a hub and two spoke sites, DHCP relay, and OSPF with static failover</li>
+      </ul>
+      <ul class="tags"><li>NIST CSF 2.0</li><li>Risk assessment</li><li>CIS benchmarks</li><li>Python</li><li>Cisco Packet Tracer</li></ul>
+      <p class="links">
+        <a href="https://github.com/shepdogg6t7-glitch/netsec-grc-labs">Source and documents</a>
+      </p>
+    </article>
+
+  </section>
+
   <footer>
-    &copy; 2026 Portfolio Hub
+    <p><a href="https://github.com/shepdogg6t7-glitch">github.com/shepdogg6t7-glitch</a></p>
   </footer>
+</main>
 </body>
 </html>
